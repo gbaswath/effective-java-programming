@@ -1,6 +1,5 @@
 package io.programming.chapter7.item42.functional.lambda;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
