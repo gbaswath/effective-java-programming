@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.programming</groupId>
+    <artifactId>effective-java</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>functional-interface</artifactId>
+
+  <packaging>jar</packaging>
+
+  <!--Third Party Dependencies-->
+
+  <!--TEST NG Dependency-->
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>
