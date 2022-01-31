@@ -32,4 +32,17 @@ public class LambdaExample {
         });
     }
 
+    /**
+     * Sort <code>String</code> elements basis character length. This is an example of 
+     * using lambda expression instead of obsolete anonymous class
+     * @param elements - List of Elements to sort.
+     */
+    public static void sortStringElementsUsingLambda(List<String> elements) {
+        if(elements == null) 
+            return;
+        
+        Collections.sort(elements, Comparator.nullsFirst(
+            (s1, s2) -> Integer.compare(s1.length(), s2.length())));    
+    }
+
 }
