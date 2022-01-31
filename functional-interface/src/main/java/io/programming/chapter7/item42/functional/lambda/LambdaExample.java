@@ -57,4 +57,17 @@ public class LambdaExample {
         elements.sort(Comparator.nullsFirst(Comparator.comparingInt(String::length)));
     }
 
+    /**
+     * Sort <code>String</code> elements basis alphabet natural sorting sequence. 
+     * This is an example of using enriched lambda expression using Java 8 comparator
+     * specific APIs
+     * @param elements - List of Elements to sort.
+     */
+    public static void sortStringElementsUsingNaturalOrder(List<String> elements) {
+        if(elements == null) 
+            return;
+        
+        elements.sort(Comparator.nullsFirst(Comparator.naturalOrder()));
+    }
+
 }

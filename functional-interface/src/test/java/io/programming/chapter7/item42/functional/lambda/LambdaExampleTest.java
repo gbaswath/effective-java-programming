@@ -27,6 +27,12 @@ public class LambdaExampleTest {
         Assert.assertEquals(input, expected);
     }
 
+    @Test(dataProvider = "sortElementsNaturalOrderDataProvider")
+    public void testSortElementsUsingNaturalOrder(List<String> input, List<String> expected) {
+        LambdaExample.sortStringElementsUsingNaturalOrder(input);
+        Assert.assertEquals(input, expected);
+    }
+
     @DataProvider
     public Object[][] sortElementsDataProvider() {
         return new Object[][] {
@@ -34,6 +40,17 @@ public class LambdaExampleTest {
             new Object [] {Arrays.asList(null, "A"), Arrays.asList(null, "A")},
             new Object [] {Arrays.asList("null", null), Arrays.asList(null, "null")},
             new Object [] {Arrays.asList("ABC", "XY", "Z"), Arrays.asList("Z", "XY", "ABC")},
+        };
+    }
+
+    @DataProvider
+    public Object[][] sortElementsNaturalOrderDataProvider() {
+        return new Object[][] {
+            new Object [] {null, null},
+            new Object [] {Arrays.asList(null, "A"), Arrays.asList(null, "A")},
+            new Object [] {Arrays.asList("null", null), Arrays.asList(null, "null")},
+            new Object [] {Arrays.asList("ABC", "XY", "Z"), Arrays.asList("ABC", "XY", "Z")},
+            new Object [] {Arrays.asList("C1", "A3", "B2"), Arrays.asList("A3", "B2", "C1")},
         };
     }
 
