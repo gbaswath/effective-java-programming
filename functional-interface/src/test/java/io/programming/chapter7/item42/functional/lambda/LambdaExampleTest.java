@@ -17,10 +17,8 @@ public class LambdaExampleTest {
 
     @DataProvider
     public Object[][] sortElementsDataProvider() {
-        /* List<String> invalidInput = new ArrayList<>();
-        invalidInput.add(null);
-        invalidInput.add("A"); */
         return new Object[][] {
+            new Object [] {null, null},
             new Object [] {Arrays.asList(null, "A"), Arrays.asList(null, "A")},
             new Object [] {Arrays.asList("null", null), Arrays.asList(null, "null")},
             new Object [] {Arrays.asList("ABC", "XY", "Z"), Arrays.asList("Z", "XY", "ABC")},
