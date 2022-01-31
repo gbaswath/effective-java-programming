@@ -70,4 +70,39 @@ public class LambdaExample {
         elements.sort(Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
+    /**
+     * Calculator Operation to perform addition, subtraction, multiplication 
+     * & division.
+     */
+    static enum Operation {
+        PLUS("+") {
+            public double operate(double a, double b) {
+                return a+b;
+            }
+        },
+        MINUS("-") {
+            public double operate(double a, double b) {
+                return a-b;
+            }
+        },
+        TIMES("*") {
+            public double operate(double a, double b) {
+                return a*b;
+            }
+        },
+        DIVIDES("/") {
+            public double operate(double a, double b) {
+                return a/b;
+            }
+        };
+        final String symbol;
+        Operation(String symbol) {
+            this.symbol = symbol;
+        }
+        public abstract double operate(double a, double b);
+        public String toString() {
+            return symbol;
+        }
+    }
+
 }
