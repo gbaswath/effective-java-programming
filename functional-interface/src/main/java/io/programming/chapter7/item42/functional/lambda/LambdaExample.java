@@ -3,6 +3,7 @@ package io.programming.chapter7.item42.functional.lambda;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.DoubleBinaryOperator;
 
 /**
  * Item 42 : Prefer Lambdas to anonymous class
@@ -95,14 +96,42 @@ public class LambdaExample {
                 return a/b;
             }
         };
+        
         final String symbol;
+        
         Operation(String symbol) {
             this.symbol = symbol;
         }
+        
         public abstract double operate(double a, double b);
+        
         public String toString() {
             return symbol;
         }
     }
 
+    static enum OperationUsingLambda {
+        PLUS("+", (a,b) -> a+b),
+        MINUS("-", (a,b) -> a-b),
+        TIMES("*", (a,b) -> a*b),
+        DIVIDES("/", (a,b) -> a/b);
+        
+        final String symbol;
+        
+        final DoubleBinaryOperator operator;
+        
+        OperationUsingLambda(String symbol, DoubleBinaryOperator operator) {
+            this.symbol = symbol;
+            this.operator = operator;
+        }
+        
+        double operate(double a, double b) {
+            return operator.applyAsDouble(a, b);
+        }
+        
+        public String toString() {
+            return symbol;
+        }
+
+    }
 }

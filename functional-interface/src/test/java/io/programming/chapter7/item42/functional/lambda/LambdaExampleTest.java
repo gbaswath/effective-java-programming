@@ -39,6 +39,12 @@ public class LambdaExampleTest {
         Assert.assertEquals(operation.operate(a, b), result, 0);
     }
 
+    @Test(dataProvider = "operationUsingLambdaDataProvider")
+    public void testConstantBodyDefnUsingEnumLambda(LambdaExample.OperationUsingLambda operation, 
+        double a, double b, double result) {
+        Assert.assertEquals(operation.operate(a, b), result, 0);
+    }
+
     @DataProvider
     public Object[][] sortElementsDataProvider() {
         return new Object[][] {
@@ -69,6 +75,18 @@ public class LambdaExampleTest {
             new Object[] {LambdaExample.Operation.DIVIDES, 0, 1, 0},
             new Object[] {LambdaExample.Operation.DIVIDES, 1, 0, Double.POSITIVE_INFINITY},
             new Object[] {LambdaExample.Operation.DIVIDES, -1, 0, Double.NEGATIVE_INFINITY},
+        };
+    }
+
+    @DataProvider
+    public Object[][] operationUsingLambdaDataProvider() {
+        return new Object[][] {
+            new Object[] {LambdaExample.OperationUsingLambda.PLUS, 1, 1, 2},
+            new Object[] {LambdaExample.OperationUsingLambda.MINUS, 1, 2, -1},
+            new Object[] {LambdaExample.OperationUsingLambda.TIMES, 1, 0, 0},
+            new Object[] {LambdaExample.OperationUsingLambda.DIVIDES, 0, 1, 0},
+            new Object[] {LambdaExample.OperationUsingLambda.DIVIDES, 1, 0, Double.POSITIVE_INFINITY},
+            new Object[] {LambdaExample.OperationUsingLambda.DIVIDES, -1, 0, Double.NEGATIVE_INFINITY},
         };
     }
 
