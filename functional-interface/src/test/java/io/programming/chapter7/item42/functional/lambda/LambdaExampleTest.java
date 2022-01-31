@@ -21,6 +21,12 @@ public class LambdaExampleTest {
         Assert.assertEquals(input, expected);
     }
 
+    @Test(dataProvider = "sortElementsDataProvider")
+    public void testSortElementsUsingEnrichedLambda(List<String> input, List<String> expected) {
+        LambdaExample.sortStringElementsUsingEnrichedLambda(input);
+        Assert.assertEquals(input, expected);
+    }
+
     @DataProvider
     public Object[][] sortElementsDataProvider() {
         return new Object[][] {

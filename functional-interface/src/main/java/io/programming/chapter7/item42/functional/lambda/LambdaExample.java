@@ -45,4 +45,16 @@ public class LambdaExample {
             (s1, s2) -> Integer.compare(s1.length(), s2.length())));    
     }
 
+    /**
+     * Sort <code>String</code> elements basis character length. This is an example of 
+     * using enriched lambda expression instead of obsolete anonymous class
+     * @param elements - List of Elements to sort.
+     */
+    public static void sortStringElementsUsingEnrichedLambda(List<String> elements) {
+        if(elements == null) 
+            return;
+        
+        elements.sort(Comparator.nullsFirst(Comparator.comparingInt(String::length)));
+    }
+
 }
