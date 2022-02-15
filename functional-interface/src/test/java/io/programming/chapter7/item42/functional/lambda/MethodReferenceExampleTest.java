@@ -49,4 +49,23 @@ public class MethodReferenceExampleTest {
                 new Object[] { Arrays.asList("HI", "HI", null, null), dualNullOccurrence },
         };
     }
+
+    @Test(dataProvider = "getElementsDataProvider")
+    public void testPrintElementsUsingMethodReference(List<String> elements) {
+        MethodReferenceExample.printElementsUsingMethodReference(elements);
+    }
+
+    @Test(dataProvider = "getElementsDataProvider")
+    public void testPrintElementsUsingLambda(List<String> elements) {
+        MethodReferenceExample.printElementsUsingLambda(elements);
+    }
+
+    @DataProvider
+    public Object[][] getElementsDataProvider() {
+        return new Object[][] {
+            new Object[] {null},
+            new Object[] {Collections.emptyList()},
+            new Object[] {Arrays.asList(null, "HI", null)},
+        };
+    }
 }

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Item 43 : Prefer Method Reference to Lambdas
@@ -39,6 +40,32 @@ public class MethodReferenceExample {
             Map<String, Integer> keyCounterMap = new HashMap<>();
             keys.forEach(key -> keyCounterMap.merge(key, 1, Integer::sum));
             return keyCounterMap;
+        }
+    }
+
+    /**
+     * Print Elements to Console by mapping input to input using Identity
+     * 
+     * @param elements - ELements to be printed.
+     */
+    static void printElementsUsingMethodReference(List<String> elements) {
+        if (elements == null || elements.isEmpty()) {
+            System.out.println("Elements is empty. Hence printing skipped");
+        } else {
+            elements.stream().map(Function.identity()).forEach(System.out::println);
+        }
+    }
+
+    /**
+     * Print Elements to Console by mapping input to input using Lambda
+     * 
+     * @param elements - ELements to be printed.
+     */
+    static void printElementsUsingLambda(List<String> elements) {
+        if (elements == null || elements.isEmpty()) {
+            System.out.println("Elements is empty. Hence printing skipped");
+        } else {
+            elements.forEach(System.out::println);
         }
     }
 
