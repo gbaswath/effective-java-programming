@@ -21,6 +21,13 @@ public class MethodReferenceExampleTest {
         Assert.assertEquals(actual, expected);
     }
 
+    @Test(dataProvider = "getKeysDataProvider")
+    public void testAssociateCountToKeysUsingMethodReference(
+            List<String> keys, Map<String, Integer> expected) {
+        Map<String, Integer> actual = MethodReferenceExample.associateCountToKeysUsingMethodReference(keys);
+        Assert.assertEquals(actual, expected);
+    }
+
     @DataProvider
     public Object[][] getKeysDataProvider() {
         Map<String, Integer> emptyKeyResult = Collections.emptyMap();
@@ -35,11 +42,11 @@ public class MethodReferenceExampleTest {
         dualNullOccurrence.put(null, 2);
         dualNullOccurrence.put("HI", 2);
         return new Object[][] {
-                new Object[] {Collections.emptyList(), emptyKeyResult},
-                new Object[] {Arrays.asList("HI"), singleKeyOccurrence},
-                new Object[] {Arrays.asList("HI", "HI"), dualKeyOccurrence},
-                new Object[] {Arrays.asList("HI", null), singleNullOccurrence},
-                new Object[] {Arrays.asList("HI", "HI", null, null), dualNullOccurrence},
+                new Object[] { Collections.emptyList(), emptyKeyResult },
+                new Object[] { Arrays.asList("HI"), singleKeyOccurrence },
+                new Object[] { Arrays.asList("HI", "HI"), dualKeyOccurrence },
+                new Object[] { Arrays.asList("HI", null), singleNullOccurrence },
+                new Object[] { Arrays.asList("HI", "HI", null, null), dualNullOccurrence },
         };
     }
 }

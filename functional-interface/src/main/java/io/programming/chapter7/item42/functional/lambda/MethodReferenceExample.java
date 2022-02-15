@@ -11,7 +11,7 @@ import java.util.Map;
 public class MethodReferenceExample {
 
     /**
-     * This method maps key to occurrence count
+     * This method maps key to occurrence count using Lambda Expression
      * 
      * @param key - List of Keys to get concurrence count.
      */
@@ -22,6 +22,22 @@ public class MethodReferenceExample {
         } else {
             Map<String, Integer> keyCounterMap = new HashMap<>();
             keys.forEach(key -> keyCounterMap.merge(key, 1, (count, increment) -> count + increment));
+            return keyCounterMap;
+        }
+    }
+
+    /**
+     * This method maps key to occurrence count using <code>Integer::sum</code>
+     * 
+     * @param key - List of Keys to get concurrence count.
+     */
+    static Map<String, Integer> associateCountToKeysUsingMethodReference(List<String> keys) {
+        if (keys == null || keys.isEmpty()) {
+            System.out.println("Key to associate is empty. Hence association skipped");
+            return Collections.emptyMap();
+        } else {
+            Map<String, Integer> keyCounterMap = new HashMap<>();
+            keys.forEach(key -> keyCounterMap.merge(key, 1, Integer::sum));
             return keyCounterMap;
         }
     }
