@@ -1,6 +1,7 @@
 package io.programming.chapter7.item42.functional.lambda;
 
 import java.util.LinkedHashMap;
+import java.util.function.Function;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -44,5 +45,16 @@ public class FunctionalInterfaceExampleTest {
         return new Object[][] {
                 new Object[] { expected },
         };
+    }
+
+    @Test
+    public void testInvokeAllBasicStandardFunctionalInterface() {
+      FunctionalInterfaceExample.invokeAllBasicStandardFunctionalInterface(
+          System.out::println,
+          String::isEmpty,
+          Integer::toBinaryString,
+          Integer::numberOfLeadingZeros,
+          Integer::sum,
+          () -> 0);
     }
 }
