@@ -22,6 +22,20 @@ public class FunctionalInterfaceExampleTest {
         Assert.assertEquals(actual, expected);
     }
 
+    @Test(dataProvider = "getCustomFunctionalInterfaceDataProvider")
+    public void testRemoveEldestEntryUsingStandardFunctionalInterface(LinkedHashMap<String, String> expected) {
+        LinkedHashMap<String, String> actual = FunctionalInterfaceExample
+                .removeEldestEntryUsingStandardFunctionalInterface();
+        actual.put("1", "1");
+        actual.put("2", "2");
+        actual.put("3", "3");
+        actual.put("4", "4");
+        actual.put("5", "5");
+        actual.put("HI", "HI");
+        actual.put("BYE", "BYE");
+        Assert.assertEquals(actual, expected);
+    }
+
     @DataProvider
     public Object[][] getCustomFunctionalInterfaceDataProvider() {
         LinkedHashMap<String, String> expected = new LinkedHashMap<>();
