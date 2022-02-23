@@ -1,6 +1,12 @@
 package io.programming.chapter7.item42.functional.lambda;
 
 import java.util.LinkedHashMap;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -72,14 +78,15 @@ public class FunctionalInterfaceExample {
 
     /**
      * Invokes all Basic Standard Interface
-     * @param <T> - Integer
-     * @param <R> - String
-     * @param consumer - Prints
-     * @param predicate - Test For Empty
-     * @param function - Convert Integer to String
-     * @param unaryOperator - Return Number of Leading Zeros 
+     * 
+     * @param <T>            - Integer
+     * @param <R>            - String
+     * @param consumer       - Prints
+     * @param predicate      - Test For Empty
+     * @param function       - Convert Integer to String
+     * @param unaryOperator  - Return Number of Leading Zeros
      * @param binaryOperator - Return Sum of Integer
-     * @param supplier - Return 0
+     * @param supplier       - Return 0
      */
     static <T, R> void invokeAllBasicStandardFunctionalInterface(
             Consumer<Boolean> consumer,
@@ -92,6 +99,24 @@ public class FunctionalInterfaceExample {
                 predicate.test(
                         function.apply(
                                 unaryOperator.apply(binaryOperator.apply(supplier.get(), supplier.get())))));
+    }
+
+    /**
+     * Function to display the no differences between <code>Callable</code> and
+     * <code>Runnable</code>. It is wise to explicitly create variables and use it
+     * instead of lambda definition.
+     */
+    static void submitExecutable() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        // Runnable Lambda
+        executor.submit(() -> System.out.println("Runnable Response Hi"));
+        // Callable Lambda
+        Future<String> response = executor.submit(() -> "Hello");
+        try {
+            System.out.println("Callable Response " + response.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 }

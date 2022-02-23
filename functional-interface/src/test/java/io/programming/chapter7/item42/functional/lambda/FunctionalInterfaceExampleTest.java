@@ -57,4 +57,9 @@ public class FunctionalInterfaceExampleTest {
           Integer::sum,
           () -> 0);
     }
+
+    @Test
+    public void testSubmitExecutable() {
+        FunctionalInterfaceExample.submitExecutable();
+    }
 }
