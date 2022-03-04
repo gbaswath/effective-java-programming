@@ -1,7 +1,6 @@
 package io.programming.chapter7.item42.functional.lambda;
 
 import java.util.LinkedHashMap;
-import java.util.function.Function;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
