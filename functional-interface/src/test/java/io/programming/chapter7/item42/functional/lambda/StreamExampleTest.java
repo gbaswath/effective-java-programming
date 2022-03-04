@@ -61,4 +61,13 @@ public class StreamExampleTest {
         Assert.assertEquals(primes.size(), 10);
     }
 
+    @Test
+    public void testGetDeckUsingIterative() {
+        Assert.assertEquals(StreamExample.getDeckUsingIterative().size(), 9);
+    }
+
+    @Test
+    public void testGetDeckUsingStreams() {
+        Assert.assertEquals(StreamExample.getDeckUsingStreams().size(), 9);
+    }
 }

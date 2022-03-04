@@ -1,6 +1,7 @@
 package io.programming.chapter7.item42.functional.lambda;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -123,4 +124,86 @@ public class StreamExample {
                 .collect(Collectors.toList());
     }
 
+    private static class Rank {
+
+        @Override
+        public String toString() {
+            return "Rank []";
+        }
+
+    }
+
+    private static class Suit {
+
+        @Override
+        public String toString() {
+            return "Suit []";
+        }
+
+    }
+
+    private static class Card {
+
+        Rank rank;
+        Suit suit;
+
+        Card(Rank rank, Suit suit) {
+            this.rank = rank;
+            this.suit = suit;
+        }
+
+        static Card of(Rank rank, Suit suit) {
+            return new Card(rank, suit);
+        }
+
+        @Override
+        public String toString() {
+            return "Card [rank=" + rank + ", suit=" + suit + "]";
+        }
+    }
+
+    /**
+     * Prepare 3 Ranks
+     * 
+     * @return List of Ranks
+     */
+    private static List<Rank> getRanks() {
+        return Arrays.asList(new Rank(), new Rank(), new Rank());
+    }
+
+    /**
+     * Prepare 3 Suits
+     * 
+     * @return List of Suits
+     */
+    private static List<Suit> getSuits() {
+        return Arrays.asList(new Suit(), new Suit(), new Suit());
+    }
+
+    /**
+     * Prepare Card Deck with Rank & Suit using Iterative Approach
+     * 
+     * @return List of Cards
+     */
+    static List<Card> getDeckUsingIterative() {
+        List<Card> cards = new ArrayList<>();
+        for (Rank rank : getRanks())
+            for (Suit suit : getSuits())
+                cards.add(Card.of(rank, suit));
+        return cards;
+    }
+
+    /**
+     * Prepare Card Deck Using Streams Way
+     * 
+     * @return
+     */
+    static List<Card> getDeckUsingStreams() {
+        return getSuits().stream()
+                // Intermediate Operation FlatMap to convert Suit Collectin & Rank Collection to
+                // Card Collection
+                .flatMap(suit -> getRanks().stream().map(rank -> Card.of(rank, suit)))
+                // Terminal Operation Collect
+                .collect(Collectors.toList());
+    }
 }
