@@ -2,7 +2,9 @@ package io.programming.chapter7.item42.functional.lambda;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,6 +41,27 @@ public class EfficientStreamExampleTest {
                 new Object[] { Collections.EMPTY_SET, null },
                 new Object[] { new TreeSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DEF")), freqMap },
                 new Object[] { new TreeSet<>(Arrays.asList("abc", "DEF", "CAB", "ABC", "cab")), freqMap }
+        };
+    }
+
+    @Test(dataProvider = "getWordToTestTop3Frequencies")
+    public void testGetTop3FrequenciesForWord(Set<String> words, List<String> expectedOutput) {
+        Assert.assertEquals(EfficientStreamExample.getTop3FrequenciesForWord(words), expectedOutput);
+    }
+
+    @DataProvider
+    public static Object[][] getWordToTestTop3Frequencies() {
+        return new Object[][] {
+                new Object[] { null, null },
+                new Object[] { Collections.EMPTY_SET, null },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DEF")),
+                        Arrays.asList("abc", "cab", "def")
+                },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "DEF", "CAB", "ABC", "cab", "CaB", "ARG")),
+                        Arrays.asList("cab", "abc", "def")
+                },
         };
     }
 }
