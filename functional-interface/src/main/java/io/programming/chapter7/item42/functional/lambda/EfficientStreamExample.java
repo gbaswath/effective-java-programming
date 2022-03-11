@@ -67,4 +67,25 @@ public class EfficientStreamExample {
         }
         return top3Frequencies;
     }
+
+    /**
+     * Get Top 3 Frequencies for each occurrence of word in given
+     * <code>words</code> along with its character count
+     * 
+     * @param words - Input words to prepare frequency mapping
+     * @return Set of words having top 3 occurrences.
+     */
+    static Map<String, Integer> getTop3FrequenciesCharacterCountMap(Set<String> words) {
+        Map<String, Integer> top3FrequenciesCharacterCount = null;
+        if (words == null || words.isEmpty()) {
+            System.out.println("Words should not empty to get frequencies");
+        } else {
+            Map<String, Long> wordFrequencies = words.stream()
+                    .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
+            top3FrequenciesCharacterCount = wordFrequencies.keySet().stream()
+                    .sorted(Comparator.comparing(wordFrequencies::get).reversed()).limit(3)
+                    .collect(Collectors.toMap(key -> key, String::length));
+        }
+        return top3FrequenciesCharacterCount;
+    }
 }

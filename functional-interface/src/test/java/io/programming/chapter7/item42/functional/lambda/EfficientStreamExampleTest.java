@@ -64,4 +64,30 @@ public class EfficientStreamExampleTest {
                 },
         };
     }
+
+    @Test(dataProvider = "getWordToTestTop3FrequenciesCharacterCount")
+    public void testGetTop3FrequenciesCharacterCountMap(
+            Set<String> words, Map<String, Integer> expectedOutput) {
+        Assert.assertEquals(
+                EfficientStreamExample.getTop3FrequenciesCharacterCountMap(words), expectedOutput);
+    }
+
+    @DataProvider
+    public static Object[][] getWordToTestTop3FrequenciesCharacterCount() {
+        Map<String, Integer> top3FreqCharacterMap = new LinkedHashMap<>();
+        top3FreqCharacterMap.put("abc", 3);
+        top3FreqCharacterMap.put("cab", 3);
+        top3FreqCharacterMap.put("de", 2);
+        return new Object[][] {
+                new Object[] { null, null },
+                new Object[] { Collections.EMPTY_SET, null },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DE")), top3FreqCharacterMap
+                },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "DE", "CAB", "ABC", "cab", "CaB", "Arg")),
+                        top3FreqCharacterMap
+                },
+        };
+    }
 }
