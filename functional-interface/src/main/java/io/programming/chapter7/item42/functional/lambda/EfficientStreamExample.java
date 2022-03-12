@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -84,8 +85,30 @@ public class EfficientStreamExample {
                     .collect(Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
             top3FrequenciesCharacterCount = wordFrequencies.keySet().stream()
                     .sorted(Comparator.comparing(wordFrequencies::get).reversed()).limit(3)
-                    .collect(Collectors.toMap(key -> key, String::length));
+                    .collect(Collectors.toMap(Function.identity(), String::length));
         }
         return top3FrequenciesCharacterCount;
+    }
+
+    /**
+     * To find occurrences of ABC from set of input <code>words</code> and then
+     * group by its result
+     * either <code>tru</code> or <code>false</code>
+     *
+     * @param words - Input words to find ABC occurrences
+     * @return Map of values either having words with ABC occurrences or words with
+     *         non ABC
+     *         occurrences.
+     */
+    static Map<Boolean, Set<String>> findABCOccurrences(Set<String> words) {
+        Map<Boolean, Set<String>> abcOccurrencesMap = null;
+        if (words == null || words.isEmpty()) {
+            System.out.println("Words should not empty to find ABC occurrences");
+        } else {
+            abcOccurrencesMap = words.stream()
+                    .collect(Collectors.partitioningBy(
+                        word -> word.equalsIgnoreCase("ABC"), Collectors.toSet()));
+        }
+        return abcOccurrencesMap;
     }
 }

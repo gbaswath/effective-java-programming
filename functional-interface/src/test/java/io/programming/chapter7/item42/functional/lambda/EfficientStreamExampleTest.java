@@ -90,4 +90,22 @@ public class EfficientStreamExampleTest {
                 },
         };
     }
+
+    @Test(dataProvider = "getABCOccurrencesMap")
+    public void testFindABCOccurrences(Set<String> words, Map<Boolean, Set<String>> expectedOutput) {
+        Assert.assertEquals(EfficientStreamExample.findABCOccurrences(words), expectedOutput);
+    }
+
+    @DataProvider
+    public static Object[][] getABCOccurrencesMap() {
+        Map<Boolean, Set<String>> abcOccurrencesMap = new LinkedHashMap<>();
+        abcOccurrencesMap.put(true, new HashSet<>(Arrays.asList("abc", "ABC")));
+        abcOccurrencesMap.put(false, new HashSet<>(Arrays.asList("CAB", "cab", "DEF")));
+        return new Object[][] {
+                new Object[] { null, null },
+                new Object[] { Collections.EMPTY_SET, null },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DEF")), abcOccurrencesMap }
+        };
+    }
 }
