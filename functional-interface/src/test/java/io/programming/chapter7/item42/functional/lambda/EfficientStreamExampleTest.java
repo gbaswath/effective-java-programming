@@ -127,4 +127,30 @@ public class EfficientStreamExampleTest {
                 },
         };
     }
+
+    @Test(dataProvider = "joinWordsInput")
+    public void testJoinWords(
+            List<String> words, String delimiter, String prefix, String suffix, String expectedOutput) {
+        Assert.assertEquals(
+                EfficientStreamExample.joinWords(words, delimiter, prefix, suffix), expectedOutput);
+    }
+
+    @DataProvider
+    public static Object[][] joinWordsInput() {
+        return new Object[][] {
+                new Object[] { null, null, null, null, null },
+                new Object[] { Collections.EMPTY_LIST, null, null, null, null },
+                new Object[] { Collections.singletonList("HI"), null, null, null, null },
+                new Object[] {
+                        Arrays.asList("abc", "ABC", "CAB", "cab", "DEF"), ",", "", ")", "abc,ABC,CAB,cab,DEF)"
+                },
+                new Object[] {
+                        Arrays.asList("abc", "DEF", "CAB", "ABC", "cab", "CaB", "ARG"),
+                        ",",
+                        "(",
+                        ")",
+                        "(abc,DEF,CAB,ABC,cab,CaB,ARG)"
+                },
+        };
+    }
 }

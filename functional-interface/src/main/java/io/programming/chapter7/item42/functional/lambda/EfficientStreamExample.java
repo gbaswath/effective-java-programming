@@ -135,4 +135,24 @@ public class EfficientStreamExample {
         }
         return average;
     }
+
+    /**
+     * Concatenates input <code>words</code> with proper delimiter, prefix and
+     * suffix.
+     *
+     * @param words     - input words to concatenate
+     * @param delimiter - limit using this token
+     * @param prefix    - starts with this prefix
+     * @param suffix    - starts with this suffix
+     * @return concatenated word basis above parameters
+     */
+    static String joinWords(List<String> words, String delimiter, String prefix, String suffix) {
+        String result = null;
+        if (words == null || words.isEmpty() || delimiter == null || prefix == null || suffix == null) {
+            System.out.println("Words should not be empty to join words");
+        } else {
+            result = words.stream().collect(Collectors.joining(delimiter, prefix, suffix));
+        }
+        return result;
+    }
 }
