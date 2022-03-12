@@ -108,4 +108,23 @@ public class EfficientStreamExampleTest {
                         new HashSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DEF")), abcOccurrencesMap }
         };
     }
+
+    @Test(dataProvider = "getWordsToAverageCharacterCountForTop3Frequencies")
+    public void testGetTop3FrequenciesCharacterCountAverage(
+            Set<String> words, double expectedOutput) {
+        Assert.assertEquals(
+                EfficientStreamExample.getTop3FrequenciesCharacterCountAverage(words), expectedOutput);
+    }
+
+    @DataProvider
+    public static Object[][] getWordsToAverageCharacterCountForTop3Frequencies() {
+        return new Object[][] {
+                new Object[] { null, 0.0 },
+                new Object[] { Collections.EMPTY_SET, 0.0 },
+                new Object[] { new HashSet<>(Arrays.asList("abc", "ABC", "CAB", "cab", "DEF")), 3.0 },
+                new Object[] {
+                        new HashSet<>(Arrays.asList("abc", "DEF", "CAB", "ABC", "cab", "CaB", "ARG")), 3.0
+                },
+        };
+    }
 }

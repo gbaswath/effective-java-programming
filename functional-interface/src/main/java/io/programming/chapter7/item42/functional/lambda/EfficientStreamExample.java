@@ -107,8 +107,32 @@ public class EfficientStreamExample {
         } else {
             abcOccurrencesMap = words.stream()
                     .collect(Collectors.partitioningBy(
-                        word -> word.equalsIgnoreCase("ABC"), Collectors.toSet()));
+                            word -> word.equalsIgnoreCase("ABC"), Collectors.toSet()));
         }
         return abcOccurrencesMap;
+    }
+
+    /**
+     * Get average of top 3 Frequencies for each occurrence of word in given
+     * <code>words</code>
+     *
+     * @param words - Input words to prepare frequency mapping and it's average
+     * @return Average of set of words having top 3 occurrences basis character
+     *         count
+     */
+    static double getTop3FrequenciesCharacterCountAverage(Set<String> words) {
+        double average = 0;
+        if (words == null || words.isEmpty()) {
+            System.out.println("Words should not be empty to get Top 3 frequencies");
+        } else {
+            Map<String, Long> frequencyMap = words.stream().collect(
+                    Collectors.groupingBy(String::toLowerCase, Collectors.counting()));
+            Map<String, Integer> top3Frequencies = frequencyMap.keySet().stream()
+                    .sorted(Comparator.comparing(frequencyMap::get).reversed())
+                    .limit(3)
+                    .collect(Collectors.toMap(key -> key, String::length));
+            average = top3Frequencies.keySet().stream().collect(Collectors.averagingInt(String::length));
+        }
+        return average;
     }
 }
