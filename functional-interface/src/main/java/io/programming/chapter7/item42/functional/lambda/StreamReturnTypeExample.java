@@ -3,9 +3,11 @@ package io.programming.chapter7.item42.functional.lambda;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -107,5 +109,50 @@ public class StreamReturnTypeExample {
                 return size;
             }
         };
+    }
+
+    /**
+     * Prepare Contiguous Sub List from List of Elements such a way that {a, b, c} would 
+     * result into {, a, b, c, ab, bc, abc}
+     * @param <E>
+     * @param elements
+     * @return
+     */
+    static <E> Stream<List<E>> subListOf(List<E> elements) {
+        Stream<List<E>> subLists = null;
+        if (elements == null || elements.isEmpty()) {
+            System.out.println("Elements should not be null for preparing sub lists");
+        } else {
+            // Concatenate Prefixes, Suffixes Stream
+            subLists = Stream.concat(Stream.of(Collections.emptyList()),
+                    prefixes(elements).flatMap(StreamReturnTypeExample::suffixes));
+        }
+        return subLists;
+    }
+
+    /**
+     * /**
+     * Prepare Stream of Elements of Size 3 having prefix constant such as
+     * {A}, {AB}, {ABC}
+     * 
+     * @param <E>      - Element Type
+     * @param elements Array Elements
+     * @return Int Stream of having List of Elements with suffix constant
+     */
+    static <E> Stream<List<E>> prefixes(List<E> elements) {
+        return IntStream.rangeClosed(1, elements.size()).mapToObj(end -> elements.subList(0, end));
+    }
+
+    /**
+     * Prepare Stream of Elements of Size 3 having sufix constant such as
+     * {ABC}, {BC}, {C}
+     * 
+     * @param <E>      - Element Type
+     * @param elements Array Elements
+     * @return Int Stream of having List of Elements with suffix constant
+     */
+    static <E> Stream<List<E>> suffixes(List<E> elements) {
+        return IntStream.range(0, elements.size())
+                .mapToObj(start -> elements.subList(start, elements.size()));
     }
 }
