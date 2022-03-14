@@ -26,4 +26,21 @@ public class StreamReturnTypeExampleTest {
                 new Object[] { Stream.of("HI", "BYE"), new HashSet<>(Arrays.asList("HI", "BYE")) }
         };
     }
+
+    @Test(dataProvider = "getIterable")
+    public <T> void testStreamOf(Iterable<T> iterable, Stream<T> expectedOutput) {
+        Stream<T> actual = StreamReturnTypeExample.streamOf(iterable);
+        Assert.assertEquals(
+                actual == null ? null : actual.iterator(),
+                expectedOutput == null ? null : expectedOutput.iterator());
+    }
+
+    @DataProvider
+    public static Object[][] getIterable() {
+        return new Object[][] {
+                new Object[] { null, null },
+                new Object[] { Arrays.asList("HI", "BYE"), Stream.of("HI", "BYE") },
+                new Object[] { new HashSet<>(Arrays.asList("HI", "BYE")), Stream.of("HI", "BYE") }
+        };
+    }
 }
