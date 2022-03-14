@@ -1,7 +1,10 @@
 package io.programming.chapter7.item42.functional.lambda;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import org.testng.Assert;
@@ -41,6 +44,34 @@ public class StreamReturnTypeExampleTest {
                 new Object[] { null, null },
                 new Object[] { Arrays.asList("HI", "BYE"), Stream.of("HI", "BYE") },
                 new Object[] { new HashSet<>(Arrays.asList("HI", "BYE")), Stream.of("HI", "BYE") }
+        };
+    }
+
+    @Test(dataProvider = "getPowerSetSource")
+    public <E> void testPowerSetOf(Set<E> elements, Set<E> powerSetAtIndex) {
+        System.out.println("Going to Test Power Set " + powerSetAtIndex);
+        Collection<Set<E>> actual = StreamReturnTypeExample.powerSetOf(elements);
+        if (elements == null) {
+            Assert.assertNull(actual);
+        } else {
+            Assert.assertTrue(actual.contains(powerSetAtIndex));
+        }
+        System.out.println("Tested Power Set " + powerSetAtIndex);
+    }
+
+    @DataProvider
+    public static Object[][] getPowerSetSource() {
+        Set<String> elements = new HashSet<>(Arrays.asList("a", "b", "c"));
+        Set<String> powerSetIndex1 = Collections.emptySet();
+        Set<String> powerSetIndex2 = new HashSet<>(Arrays.asList("b"));
+        Set<String> powerSetIndex3 = new HashSet<>(Arrays.asList("a", "c"));
+        Set<String> powerSetIndex4 = new HashSet<>(Arrays.asList("a", "b", "c"));
+        return new Object[][] {
+                new Object[] { null, null },
+                new Object[] { elements, powerSetIndex1 },
+                new Object[] { elements, powerSetIndex2 },
+                new Object[] { elements, powerSetIndex3 },
+                new Object[] { elements, powerSetIndex4 },
         };
     }
 }
