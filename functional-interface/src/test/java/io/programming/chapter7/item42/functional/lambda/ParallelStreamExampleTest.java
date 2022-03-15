@@ -11,6 +11,11 @@ public class ParallelStreamExampleTest {
         Assert.assertEquals(ParallelStreamExample.getPrimeNumbersCountSequence(endNumber), expectedOutput);
     }
 
+    @Test(dataProvider = "getEndNumbers")
+    public void testGetPrimeNumbersCountParallel(long endNumber, long expectedOutput) {
+        Assert.assertEquals(ParallelStreamExample.getPrimeNumbersCountParallel(endNumber), expectedOutput);
+    }
+
     @DataProvider
     public static Object[][] getEndNumbers() {
         return new Object[][] {
