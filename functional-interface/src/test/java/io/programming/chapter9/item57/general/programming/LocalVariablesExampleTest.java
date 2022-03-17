@@ -17,6 +17,11 @@ public class LocalVariablesExampleTest {
         LocalVariablesExample.iterateOverCollection(elements);
     }
 
+    @Test(dataProvider = "getCollectionToIterate")
+    public <E> void testIterateOverCollectionUsingIterator(Collection<E> elements) {
+        LocalVariablesExample.iterateOverCollectionUsingIterator(elements);
+    }
+
     @DataProvider
     public Object[][] getCollectionToIterate() {
         return new Object[][] {
