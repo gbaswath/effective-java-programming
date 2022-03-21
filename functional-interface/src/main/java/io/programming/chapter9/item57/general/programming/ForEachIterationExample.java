@@ -1,6 +1,8 @@
 package io.programming.chapter9.item57.general.programming;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Item 58: Prefer ForEach over Traditional For Loops
@@ -29,4 +31,35 @@ public class ForEachIterationExample {
         }
     }
 
+    /**
+     * Custom Iterable Iteration using LIFO
+     */
+    static class Stack<T> implements Iterable<T> {
+
+        private List<T> list = new ArrayList<>();
+
+        public Stack(List<T> list) {
+            this.list = list;
+        }
+
+        @Override
+        public Iterator<T> iterator() {
+            Iterator<T> it = new Iterator<T>() {
+
+                int index = list.size() - 1;
+
+                @Override
+                public boolean hasNext() {
+                    return index >= 0;
+                }
+
+                @Override
+                public T next() {
+                    return list.get(index--);
+                }
+
+            };
+            return it;
+        }
+    }
 }
