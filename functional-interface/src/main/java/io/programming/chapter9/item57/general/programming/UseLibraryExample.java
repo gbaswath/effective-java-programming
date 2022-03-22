@@ -1,6 +1,7 @@
 package io.programming.chapter9.item57.general.programming;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Item 59: Know & Use Libraries
@@ -38,5 +39,16 @@ public class UseLibraryExample {
      */
     static int generateRandomNumberKnowingRandom(int bound) {
         return random.nextInt(bound);
+    }
+
+    /**
+     * Generated Random Number using ThreadLocalRandom which does through concurrent
+     * fashion
+     * 
+     * @param bound Upper bound to generate random number
+     * @return Pseudo Random Number
+     */
+    static int generateRandomNumber(int bound) {
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 }
