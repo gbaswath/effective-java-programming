@@ -1,5 +1,6 @@
 package io.programming.chapter9.item57.general.programming;
 
+import java.io.IOException;
 import java.util.SplittableRandom;
 import java.util.stream.IntStream;
 
@@ -94,4 +95,20 @@ public class UseLibraryExampleTest {
         };
     }
 
+    @Test(dataProvider = "getURL")
+    public void testPrintURLContent(String url) throws IOException {
+        System.out.println("Invoking URL " + url);
+        UseLibraryExample.printURLContent(url);
+        System.out.println("Invoked URL " + url);
+    }
+
+    @DataProvider
+    public Object[][] getURL() {
+        return new Object[][] {
+                new Object[] { null },
+                new Object[] { "ftp://www.google.com" },
+                new Object[] { "https://news.ycombinator.com/submit" },
+                new Object[] { "https://news.ycombinator.com/news" },
+        };
+    }
 }

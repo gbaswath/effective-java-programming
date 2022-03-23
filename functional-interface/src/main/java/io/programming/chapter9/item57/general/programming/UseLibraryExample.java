@@ -1,5 +1,8 @@
 package io.programming.chapter9.item57.general.programming;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -50,5 +53,21 @@ public class UseLibraryExample {
      */
     static int generateRandomNumber(int bound) {
         return ThreadLocalRandom.current().nextInt(bound);
+    }
+
+    /**
+     * Print URL Contents for given URL
+     * 
+     * @param url - URL to read from
+     * @throws IOException - Incase of any Error during processing
+     */
+    static void printURLContent(String url) throws IOException {
+        if (url == null || url.length() == 0 || !url.startsWith("http")) {
+            System.out.println("Invalid URL to fetch contents " + url);
+        } else {
+            try (InputStream is = new URL(url).openStream()) {
+                is.transferTo(System.out);
+            }
+        }
     }
 }
